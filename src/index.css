@@ -67,6 +67,8 @@ button:focus-visible {
   }
 }
 
+/* src/index.css */
+
 body {
   padding: 16px;
   display: flex;
