@@ -10,6 +10,7 @@ const MailboxList = ({ mailboxes }) => {
           <Link key={mailbox._id} to={`/mailboxes/${mailbox._id}`}>
             <div className="mail-box">
               <p>Mailbox #{mailbox._id}</p>
+              <p>Size: {mailbox.boxSize}</p>
             </div>
           </Link>
         ))}
