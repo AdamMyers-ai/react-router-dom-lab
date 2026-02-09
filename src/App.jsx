@@ -7,14 +7,16 @@ import MailboxForm from "./components/MailboxForm/MailboxForm";
 import MailboxList from "./components/MailboxList/MailboxList";
 
 function App() {
-  const [mailboxes, setMailBoxes] = useState([]);
+  const [mailboxes, setMailboxes] = useState([]);
 
   const addBox = (formData) => {
-    const newMailBox = {
-      ...formData,
-      _id: mailboxes.lengh + 1,
-    };
-    setMailBoxes({ ...mailboxes, newMailBox });
+    setMailboxes((prevMailboxes) => [
+      ...prevMailboxes,
+      {
+        ...formData,
+        _id: prevMailboxes.length + 1,
+      },
+    ]);
   };
 
   return (
