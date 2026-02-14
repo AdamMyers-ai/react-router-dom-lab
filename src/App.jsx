@@ -5,18 +5,27 @@ import NavBar from "./components/NavBar/NavBar";
 import MailboxDetails from "./components/MailboxDetails/MailboxDetails";
 import MailboxForm from "./components/MailboxForm/MailboxForm";
 import MailboxList from "./components/MailboxList/MailboxList";
+import LetterForm from "./components/LetterForm/LetterForm";
 
 function App() {
   const [mailboxes, setMailboxes] = useState([]);
+  const [letters, setLetters] = useState([]);
 
   const addBox = (formData) => {
-    setMailboxes((prevMailboxes) => [
-      ...prevMailboxes,
-      {
-        ...formData,
-        _id: prevMailboxes.length + 1,
-      },
-    ]);
+    const newMailbox = {
+      ...formData,
+      _id: mailboxes.length + 1,
+    };
+    setMailboxes([...mailboxes, newMailbox]);
+  };
+
+  const addLetter = (formData) => {
+    const newLetter = {
+      mailboxId: Number(formData.mailboxId),
+      recipient: formData.recipient,
+      message: formData.message,
+    };
+    setLetters([...letters, newLetter]);
   };
 
   return (
@@ -42,7 +51,12 @@ function App() {
 
         <Route
           path="/mailboxes/:mailboxId"
-          element={<MailboxDetails mailboxes={mailboxes} />}
+          element={<MailboxDetails mailboxes={mailboxes} letters={letters} />}
+        />
+
+        <Route
+          path="/new-letter"
+          element={<LetterForm mailboxes={mailboxes} addLetter={addLetter} />}
         />
       </Routes>
     </>
